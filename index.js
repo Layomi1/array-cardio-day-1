@@ -3,6 +3,18 @@
 
 // Some data we can work with
 
+// const firstName = document.querySelector(".first");
+// console.log(firstName);
+// const lastName = document.querySelector(".last");
+// console.log(lastName);
+// const birthYear = document.querySelector(".year");
+// console.log(birthYear);
+// const yearOfDeath = document.querySelector(".passed");
+// console.log(yearOfDeath);
+
+// const listOfInventors = document.querySelector("#list");
+// console.log(listOfInventors);
+
 const inventors = [
   { first: "Albert", last: "Einstein", year: 1879, passed: 1955 },
   { first: "Isaac", last: "Newton", year: 1643, passed: 1727 },
@@ -64,16 +76,53 @@ const people = [
 
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's
+const filterInventors = inventors.filter((i) =>
+  i.year >= 1500 && i.year <= 1599 ? true : false,
+);
+console.table(filterInventors);
 
 // Array.prototype.map()
 // 2. Give us an array of the inventors first and last names
+const inventorList = inventors.map((i) => `${i.first} ${i.last}`);
+console.table(inventorList);
+// listOfInventors.innerText = `<table>
+//       <thead>
+//         <tr class="first">
+//           First name
+//         </tr>
+//         <tr class="last">
+//           Last name
+//         </tr>
+//         <tr class="year">
+//           Year of Birth
+//         </tr>
+//         <tr class="passed">
+//           Year od Death
+//         </tr>
+//       </thead>
+//       <tbody>
+//         <td>
+//           <tr id="list">${inventors.first}</tr>
+//           <tr id="list">${inventors.last}</tr>
+//           <tr id="list">${inventors.year}</tr>
+//           <tr id="list">${inventors.passed}</tr>
+//         </td>
+//       </tbody>
+//     </table>
+// `;
 
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest
+const orderedInventors = inventors.sort((a, b) => (a.year < b.year ? 1 : -1));
+console.table(orderedInventors);
 
-// Array.prototype.reduce()
+// Array.prototype.reduce(). allows me to loop over an array without using loop
 // 4. How many years did all the inventors live all together?
-
+const sumOfInventorLifeSpan = inventors.reduce(
+  (total, inventor) => total + (inventor.passed - inventor.year),
+  0,
+);
+console.log(sumOfInventorLifeSpan);
 // 5. Sort the inventors by years lived
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
@@ -100,3 +149,4 @@ const data = [
   "car",
   "truck",
 ];
+//  const sumData= data.reduce(())
