@@ -118,33 +118,38 @@ const orderedInventorsByYears = inventors.sort((a, b) => {
   const age = a.passed - a.year;
   const nextPersonAge = b.passed - b.year;
 
-  age < nextPersonAge ? -1 : 1;
+  return age < nextPersonAge ? -1 : 1;
 });
 
 //  6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 
 //  https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-const category = document.querySelectorAll(".mw-category-group");
-console.log("category: ", category);
+// const category = document.querySelectorAll(".mw-category-group ");
+// console.log("category: ", category);
 
-const links = Array.from(category).flatMap((group) =>
-  Array.from(group.querySelectorAll("a")),
-);
+// const links = Array.from(category).flatMap((group) =>
+//   Array.from(group.querySelectorAll("a")),
+// );
 
-console.log(links);
-const de = links.map((link) => link.textContent);
-console.log(de);
+// console.log(links);
+// const de = links
+//   .map((link) => link.textContent)
+//   .filter((street) => street.includes("de"));
+// console.log(de);
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
-const orderedPeople = people.sort(
-  (a, b) => {},
-  // console.table(people),
 
-  // a.match("a") > b.match("b") ? 1 : -1,
-);
-// console.table(orderedPeople);
+const orderedLastName = [...people].sort((lastOne, nextOne) => {
+  const [aLast, aFirst] = lastOne.split(", ")[0];
+  const [bLast, bFirst] = nextOne.split(", ")[0];
+
+  return aLast > bLast ? 1 : -1;
+});
+console.table(orderedLastName);
+
+//
 // 8. Reduce Exercise
 // Sum up the instances of each of these
 const data = [
@@ -163,8 +168,8 @@ const data = [
   "car",
   "truck",
 ];
-const sumData = data.reduce((total, i) => {
-  // const stringifyData = data.toString();
-  total + i.length;
-}, 0);
+const sumData = data.reduce((acc, item) => {
+  acc[item] ? acc[item]++ : (acc[item] = 1);
+  return acc;
+}, {});
 console.table(sumData);
