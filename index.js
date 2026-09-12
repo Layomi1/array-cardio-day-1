@@ -1,20 +1,6 @@
 // Get your shorts on - this is an array workout!
 // ## Array Cardio Day 1
 
-// Some data we can work with
-
-// const firstName = document.querySelector(".first");
-// console.log(firstName);
-// const lastName = document.querySelector(".last");
-// console.log(lastName);
-// const birthYear = document.querySelector(".year");
-// console.log(birthYear);
-// const yearOfDeath = document.querySelector(".passed");
-// console.log(yearOfDeath);
-
-// const listOfInventors = document.querySelector("#list");
-// console.log(listOfInventors);
-
 const inventors = [
   { first: "Albert", last: "Einstein", year: 1879, passed: 1955 },
   { first: "Isaac", last: "Newton", year: 1643, passed: 1727 },
@@ -112,8 +98,11 @@ console.table(inventorList);
 // `;
 
 // Array.prototype.sort()
+
 // 3. Sort the inventors by birthdate, oldest to youngest
-const orderedInventors = inventors.sort((a, b) => (a.year < b.year ? 1 : -1));
+const orderedInventors = inventors.sort((a, b) => {
+  a.year < b.year ? -1 : 1;
+});
 console.table(orderedInventors);
 
 // Array.prototype.reduce(). allows me to loop over an array without using loop
@@ -125,12 +114,37 @@ const sumOfInventorLifeSpan = inventors.reduce(
 console.log(sumOfInventorLifeSpan);
 // 5. Sort the inventors by years lived
 
-// 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-// https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+const orderedInventorsByYears = inventors.sort((a, b) => {
+  const age = a.passed - a.year;
+  const nextPersonAge = b.passed - b.year;
+
+  age < nextPersonAge ? -1 : 1;
+});
+
+//  6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
+
+//  https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+const category = document.querySelectorAll(".mw-category-group");
+console.log("category: ", category);
+
+const links = Array.from(category).flatMap((group) =>
+  Array.from(group.querySelectorAll("a")),
+);
+
+console.log(links);
+const de = links.map((link) => link.textContent);
+console.log(de);
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
+const orderedPeople = people.sort(
+  (a, b) => {},
+  // console.table(people),
 
+  // a.match("a") > b.match("b") ? 1 : -1,
+);
+// console.table(orderedPeople);
 // 8. Reduce Exercise
 // Sum up the instances of each of these
 const data = [
@@ -149,4 +163,8 @@ const data = [
   "car",
   "truck",
 ];
-//  const sumData= data.reduce(())
+const sumData = data.reduce((total, i) => {
+  // const stringifyData = data.toString();
+  total + i.length;
+}, 0);
+console.table(sumData);
